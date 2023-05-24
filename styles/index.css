@@ -1,0 +1,26 @@
+figure {
+    display: flex;
+    
+    margin: 0;
+    padding: 1em 0;
+}
+
+figure div {
+    padding: 0 1em 0 0;
+}
+
+img {
+    border-radius: 100px;
+    max-width: 50vw;
+}
+
+
+@media (max-width: 800px) {
+    figure {
+        flex-direction: column;
+    }
+    
+    img {
+        max-width: none;
+    }
+}
