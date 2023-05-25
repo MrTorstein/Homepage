@@ -48,7 +48,7 @@ header nav {
     display: flex;
     justify-content: space-between;
     
-    width: 10em;
+    width: 15em;
     
     list-style: none;
 }
@@ -64,6 +64,10 @@ nav a.text {
 .even-section p {
     margin: 0;
     padding: 1em 0;
+}
+
+h1 {
+    font-size: 4em;
 }
 
 footer {
