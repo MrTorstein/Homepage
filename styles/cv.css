@@ -1,0 +1,38 @@
+ul {
+    list-style: none;
+}
+
+table, tbody, tr, th {
+    display: block;   
+}
+
+th {
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: white;
+    
+    text-align: left;
+    
+    font-size: 1.5em;
+}
+
+td {
+    display: flex;
+    justify-content: space-between;
+    
+    padding: 0 0 0 1em;
+}
+
+h5 {
+    margin: 5px 0;
+    
+    font-size: 1em;
+}
+
+h1.title {
+    text-align: center;
+}
+
+td p {
+    margin: 1px 0;
+}
