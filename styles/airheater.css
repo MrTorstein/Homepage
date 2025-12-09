@@ -49,6 +49,11 @@ img {
     padding-left: 10vw;
 }
 
+.ref li:before {
+    content: "[" counter(item,decimal) "]";
+    counter-increment: item;
+}
+
 footer {
     font-size: 20px;
     border-style: none none none none;
