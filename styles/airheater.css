@@ -1,0 +1,61 @@
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.date {
+    padding-top: 30vh;
+}
+
+h2 {
+    padding-top: 100px;
+}
+
+.nonumber {
+    list-style: none;
+}
+
+li {
+    color: gray;
+}
+ol {
+    counter-reset: item;
+    list-style: none;
+}
+ol li:before {
+    content: counters(item, ".") " ";
+    counter-increment: item;
+}
+a {
+    color: gray;
+}
+.eq {
+    display: flex;
+    justify-content: center;
+}
+.eq div {
+    padding-left: 50px;
+}
+
+iframe {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    max-width: 50vw;
+    display: flex;
+    justify-content: center;
+    padding-left: 10vw;
+}
+
+footer {
+    font-size: 20px;
+    border-style: none none none none;
+    position: fixed;
+    bottom: 0;
+    display: none;
+}
+footer a {
+    color: var(--Day-9-yellow);
+}
