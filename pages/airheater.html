@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "UTF-8">
+		<meta http-equiv = "X-UA-Compatible" content = "ie = edge">
+		<meta name = "viewport" content = "width = device-width, initial-scale = 1.0" />
+		
+        <link rel = "stylesheet", href = "../styles/template.css">
+        <link rel = "stylesheet", href = "../styles/airheater.css">
+        
+        <link rel = "icon", href = "../images/airheater/USN_logo.png">
+        
+        <script src = "../scripts/template.js", defer></script>
+        <script src = "../scripts/airheater.js", defer></script>
+        
+		<title> Airheater Control System Report </title>
+	</head>
+	
+	<body>
+		<main class = "padding text">
+            <section>
+                <img src="../images/airheater/USN_logo.png" alt="Logo of University of South-Eastern Norway">
+                <h4 class = "center"> Faculty of Technology, Natural Sciences and Maritime Sciences </h4>
+                <h4 class = "center"> IIA3220 Internet of Things and Cyber Security </h4>
+                <h1> Airheater Control System, Datalogger and Visualiser </h1>
+                <p class = "center"> Author: Torstein Solheim Ølberg IIA</p>
+                <p class = "date center"> 7th of December 2025 </p>
+            </section>
+            <section>
+                <h2> Table of Contents </h2>
+                <ol>
+                    <li>
+                        <a href="#introduction"> Introduction </a>
+                    </li>
+                    <li>
+                        <a href="#methods"> Methods </a>
+                        <ol>
+                            <li> <a href="#pi-controller"> PI-controller </a> </li>
+                            <li> <a href="#lowpass_filter"> Lowpass Filter </a> </li>
+                            <li> <a href="#com_prot"> Communication Protocol </a> </li>
+                            <li> <a href="#gui"> Controller Application </a> </li>
+                            <li> <a href="#database"> Database </a> </li>
+                        </ol>
+                    </li>
+                    <li> <a href="#results"> Results </a> </li>
+                    <li> <a href="#discussion"> Discussion </a> </li>
+                    <li> <a href="#conclusion"> Conclusion </a> </li>
+                    <a href="#references"> References </a>
+                </ol>
+            </section>
+            <section>
+                <h2 id = "introduction"> 1. Introduction </h2>
+                <p>
+                    A new heater has been ordered by University of South-Eastern Norway, and as this heater lacks any kind of 
+                    controlling unit, USN is also in need of a control system. Since this is a university, many heaters
+                    placed at multiple locations will be needed. Thus, a list of requirements for compeating to get the task of
+                    building the finale application, have been published and can be see in <a href="#figure1">figure 1</a>. From
+                    the requirements, it is clear that to compete, a controller, datalogger and database must be created and set up
+                    to work in a realistic way to mimic the finale solutions application.
+                    As a demo version to enter the competition has been made by MadeUpCompany AS. This is a system which is 
+                    capable of controlling the heater, letting the user set its desired temperature, logging data from a heater to 
+                    a database and visualising the data on the database using a .net web application. This system is also caplable of 
+                    performing this to multiple heaters at once. A video presenting this solution was made, and can be seen 
+                    underneath in <a href="#figure2">figure 2</a> or on Youtube <cite> <a href="#ref:youtube"> [1] </a> </cite>.
+                </p>
+                <figure id = "figure1">
+                    <ul>
+                        <li>Create a PI controller for controlling an air heater.</li>
+                        <li>Perform frequency response and Stability Analysis on system and tune PI parameters using Ziegler Nichols 
+                            method.</li>
+                        <li>Control an air heater (simulator), retrieving data from it and publishing parameters using Modbus TCP</li>
+                        <li>Create GUI for the controller and ability to have multiple controllers logging at once.</li>
+                        <li>Log to Azure Cosmos DB</li>
+                        <li>Create an ASP.NET Core Web Application for Monitoring Data</li>
+                        <li>Deploy system to Microsoft Azure</li>
+                    </ul>
+                    <caption>Figure 1: List of requirements for competing to winning task of building new heating control system.</caption>
+                </figure>
+                <figure id = "figure2">
+                    <iframe class = "center" src="https://www.youtube.com/embed/ba3MMPXroMs?si=IUko8hAc70MW7M2J" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <caption>Figure 2: Video presenting the finished control system</caption>
+                </figure>
+                <p>
+                    In this report, the demo version for competing will be presented by first describing the methodes used for 
+                    building the system. Then the system itself will be presented, after this the system will be discussed and future 
+                    works outlined, and finally a summary will be provided. 
+                </p>
+            </section>
+            <section>
+                <h2 id = "methods"> 2. Methods </h2>
+                <h3 id = "pi-controller"> 2.1 PI-controller </h3>
+                <p>
+                    The algorithm for a PI-controller can be seen in <a href="#eq:1">equation 1</a>.
+                </p>
+                <div class="eq">
+                    <div id = "eq:1"> u = u_prev + kp * (e - e_prev) + kp / ti * e * dt </div>
+                    <div> (1) </div>
+                </div>
+                <p>
+                    In this equation, u is the signal given by the controller, u_prev is the previous control signal, kp is the 
+                    propotional gain, e is the difference between the current value of the variable to control and the desired level.
+                    e_prev is then the previous error term, ti is the integral time, and dt is the time since the last calculated
+                    signal. Additionally to this, there is a limit to the actual values allowed by the heater, so the signals are 
+                    limited between a max and a min value u_min <= u <= u_max. To tune the controller, Ziegler Nichols method was used, 
+                    performin a step response with kp set to 0 and ti set to a very high value (eg. 10000). Then the critical gain kc 
+                    was calculated alongside the w180 value, and using that kp = 0.45 * kc and ti = 2 * pi / (1.2 * w180), kp was found 
+                    to be 0.136 and ti = 2.0.
+                </p>
+                <h3 id = "lowpass_filter"> 2.2 Lowpass Filter </h3>
+                <p>
+                    To limit the effect of any disturbances in the airheaters temperature sensors, a lowpass filter was introduced.
+                    This filter uses the algorithm displayed in <a href="#eq:2">equation 2</a> where y is the value to be filtered,
+                    y_f is the filtered version of y. y_f_prev is the last filtered value and a is the filter constant which was set
+                    to 0.1.
+                </p>
+                <div class="eq">
+                    <div id = "eq:2"> y_f = (1 - a) * y_f_prev + a * y </div>
+                    <div> (2) </div>
+                </div>
+                <h3 id="com_prot"> 2.3 Communication Protocol </h3>
+                <p>
+                    As the system consists of different parts which must exchange information, a communication protocol is needed.
+                    From the system requirements given in <a href="#figure1">figure 1</a>, modbus is the chosen communication protocol.
+                    Modbus is a protocol where clients and servers communicate with eachother. The server hosts a set of discrete 
+                    inputs, coils, input registers and holding registers. Only the coils and holding registers can be written to, so
+                    these are the only ones used here. The coils can hold one bit values, while the holding registers can hold up to 16
+                    bits each. Each must be an integer. This means text can be encoded to a number, split up between the holding 
+                    registers, and sendt from the airheater controller to the server. Then it can be aquired by a database publisher or 
+                    a GUI to be used. Thus this application uses 20 holding registers for sending data containing temperature and time
+                    and 2 coils for displaying if the data has been updated and if it has been read. Then the same amount of registers
+                    and coils are used for giving information from the controller GUI back to the PI controller. As the server, the
+                    premade asyncronous server for pymodbus was used <a href="#ref:pymodbus">[2]</a>.
+                </p>
+                <h3 id="gui"> 2.4 Controller Application </h3>
+                <p>
+                    To change the desired temperature of the heater controller, an application was buildt using pythons tkinter package.
+                    Using a tkinter tutorial <a href="#ref:tkinter">[3]</a>, an application which aquires data from the modbus server
+                    and plotting it, while giving a user the possibility of adjusting a desired temperature parameter, which is 
+                    published to the modbus server and aquired by the controller.
+                </p>
+                <h3 id="database"> 2.5 Database </h3>
+                <p>
+                    To store data for later use, an Azure Cosmos database was used. This database is a NoSQL database hosted via 
+                    Microsoft Azure and is connected to using an API. In the database, the timestamp is used as the item id, and also 
+                    stored as its own parameter. Then the temperature is stored, and the sensor name.
+                </p>
+                <h3 id="data_vis"> 2.6 Database Visualiser </h3>
+                <p>
+                    The finale part of the system is a visualiser application for the database. This application was written in ASP.NET
+                    Core using razor pages. This is a combination of HTML for user side visuals and C# for server side programming. To
+                    save time, OpenAIs ChatGPT was used to mostly write this application <a href="ref:gpt">[4]</a>. The general layout 
+                    of the application was written and desided by the programmer, with a header, a footer, a title and content.
+                    ChatGPT was prompted to produce code to get the database data, for displaying a graph of the data with time and a
+                    drop down menu for choosing the sensors to display. Finally, the application was uploaded to Microsoft Azure, to be
+                    hosted and accessible online.
+                </p>
+            </section>
+            <section>
+                <h2 id = "results"> 3. Results </h2>
+                <p>
+                    The system consists of 6 parts, as seen in <a href="#figure3"></a>. These parts are a PI-controller, a modbus 
+                    server, a controller GUI for the PI-controller, a database publisher, an Azure Cosmos database and a database 
+                    visualiser. The database and database visualiser are hosted via Azure, and both are on demo distribution plans with
+                    little bandwith possible.
+                </p>
+                <figure id = "figure3">
+                    <img src="../images/airheater/airheater_system_sketch.png" alt="System Sketch for the Airheater control system.">
+                    <caption>
+                        Figure 3: Airheater control system sketch. The figure shows the general overview of the system, with 
+                        special emphasis on which major components are part of the system, and what information is excanged between them. 
+                    </caption>
+                </figure>
+                An display of the running system can be seen in <a href="#figure4">figure 4</a> and <a href="#figure5">figure 5</a>
+                <figure id = "figure4">
+                    <img src="../images/airheater/running_system.jpg" alt="Four running programs for controlling heater, and publishing to database.">
+                    <caption>
+                        Figure 4: A running system of a PI-controller, a modbus server, a controller GUI and a database publisher. 
+                    </caption>
+                </figure>
+                <figure id = "figure5">
+                    <img src="../images/airheater/visualiser.jpg" alt="Database visualiser, showing plot of data on database.">
+                    <caption>
+                        Figure 5: Database visualiser displaying current data on the database for the "Simulator" sensor.
+                    </caption>
+                </figure>
+            </section>
+            <section>
+                <h2 id = "discussion"> 4. Discussion </h2>
+                <p>
+                    The finale system is not a very stabil system as modbus is not a communication protocol for what it is used for here.
+                    A possible fix is to change the communication protocol to only distribute the desired temperature and the sensor 
+                    value as integers, and this would make the protocol stabil. However, this would mean the time would need to be added 
+                    to the data at each endpoint, which would mean the timestamps could be different from the controller and from the
+                    database. As this would likely only be the seconds, this could be alright, but is not ideal. Another problem, which 
+                    was fixed, was that when encoding a text into an integer for distribution over modbus, the different integers could
+                    end up starting with zero as their first digit. This digit is then removed as it is not necessary for the number, 
+                    but when the letters are put back togheter, the zero must be reattached or the text will become corrupted.  
+                </p>
+                <p>
+                    As for the future works of the system, an ideal finale product would replace modbus with another communication
+                    protocol like an MQTT broker. This would add more security to the system, remove the unstabile encoding, and remove
+                    the limit on the number of heaters able to run at the same time on the same ip. Then the controller GUI should be
+                    fleshed out a little more with a possibility for adjusting the PI controller values, and the ability to turn of or
+                    on the use of the lowpass filter. These controlls should also be locked behind a password protection such that only
+                    autorised personel can adjust the controls. Finally, the visualiser should be fleshed out with the possibility of
+                    displaying multiple sensors at the same time as different graphs, and some general statistics of max temperature,
+                    min temperature and mean temperature should be viewable. Scalability of the window and a proper positioning of all
+                    elements when the viewport shrinks or expands is also needed. Finally, the visualiser should also be hosted on a 
+                    more natural domain, and on a proper payed distribution plan instead of the demo plan it is on now.
+                </p>
+            </section>
+            <section>
+                <h2 id = "conclusion"> 5. Conclusion </h2>
+                <p>
+                    The current system is a working if a little bare bone system. It consists of six parts, a PI-controller, a modbus 
+                    server, a controller GUI, a database publisher, a database and a database visualiser. The communication protocol
+                    is making the system unstabile and limited, and should be changed in the finale soultion, along with fleshing out
+                    the GUIs and creating a long term host plan for the database and visualiser.
+                </p>
+            </section>
+            <section>
+                <h2 id="references"> References </h2>
+                <ol>
+                    <li id = "ref:youtube"> MrTorstein123456789, «Air Heater Control System, Datalogger and Visualiser,» 23 November 2025. [Online]. Available: https://www.youtube.com/watch?v=ba3MMPXroMs. [Accessed 03 December 2025]. </li>
+                    <li id = "ref:pymodbus">bashwork and j. dhoomakethhu, "pymodbus 3.11.3," [Online]. Available: https://pypi.org/project/pymodbus/. [Accessed 18 November 2025].</li>
+                    <li id = "ref:tkinter">Python Tutorial, «Tkinter Tutorial,» [Online]. Available: https://www.pythontutorial.net/tkinter/. [Accessed 17 November 2025].</li>
+                    <li id = "ref:gpt:">OpenAI, «ChatGPT,» 7 August 2025. [Online]. Available: https://chatgpt.com/share/69230fc6-b9e8-8011-b260-8d685b5c58f5. [Accessed 22 November 2025].</li>
+                </ol>
+            </section>
+		</main>
+        <footer class = "footer">
+            <a class = "back_to_top" href = "#Top">
+                Back to the top
+            </a>
+        </footer>
+	</body>
+</html>

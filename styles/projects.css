@@ -1,0 +1,28 @@
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+}
+
+a {
+    display: inline-block;
+}
+a div {
+    max-width: 30vw;
+    max-height: 35vw;
+}
+a div img {
+    max-width: 30vw;
+    max-height: 25vw;
+}
+a div h3 {
+    max-width: 30vw;
+}
+a.text {
+    color: gray;
+}
