@@ -4,3 +4,7 @@ ul {
     justify-content: space-evenly;
     padding: 0;
 }
+li {
+    max-width: 20vw;
+    max-height: 20vw;
+}
