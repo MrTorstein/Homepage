@@ -4,7 +4,7 @@ import json
 import logging
 import re
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from urllib.parse import urljoin
@@ -44,6 +44,13 @@ MAX_RETRIES = 5
 
 # API page size. The API supports pagination.
 PAGE_SIZE = 30
+
+# Hvor ofte en gammel episode skal kontrolleres på nytt.
+RECHECK_AFTER_DAYS = 60
+
+# Maksimalt antall gamle episoder som kontrolleres per kjøring.
+MAX_RECHECKS_PER_RUN = 50
+
 
 
 # ---------------------------------------------------------------------------
@@ -398,6 +405,100 @@ def get_content_length(url):
 
     # The tag is still present, which is better than omitting it.
     return 0
+
+
+def parse_cache_timestamp(value):
+    """Parse an ISO timestamp from the cache."""
+    if not value:
+        return None
+
+    try:
+        return datetime.fromisoformat(
+            value.replace("Z", "+00:00")
+        )
+    except (TypeError, ValueError):
+        return None
+
+
+def check_audio_url(url):
+    """
+    Check whether an audio URL can actually be fetched.
+
+    Returns:
+        True  = audio is available
+        False = audio is definitely unavailable
+        None  = temporary/unknown error
+    """
+    try:
+        response = session.get(
+            url,
+            headers={
+                "Range": "bytes=0-0",
+                "Accept": "audio/*",
+            },
+            stream=True,
+            allow_redirects=True,
+            timeout=30,
+        )
+
+        status = response.status_code
+        response.close()
+
+        if 200 <= status < 300:
+            return True
+
+        if status in (404, 410):
+            return False
+
+        log.warning(
+            "Could not verify audio URL %s (HTTP %s)",
+            url,
+            status,
+        )
+        return None
+
+    except requests.RequestException as exc:
+        log.warning(
+            "Could not check audio URL %s: %s",
+            url,
+            exc,
+        )
+        return None
+
+
+def resolve_episode_audio(episode_id):
+    """
+    Resolve the current playable audio asset for an episode.
+
+    Returns a dictionary containing audio information,
+    or None if NRK has no playable audio asset.
+    """
+    manifest = get_episode_manifest(episode_id)
+
+    asset = get_audio_asset(manifest)
+
+    if not asset:
+        return None
+
+    audio_url = asset.get("url")
+
+    if not audio_url:
+        return None
+
+    audio_mime = asset.get(
+        "mimeType",
+        "audio/mpeg",
+    )
+
+    audio_length = get_content_length(
+        audio_url
+    )
+
+    return {
+        "audio_url": audio_url,
+        "audio_mime": audio_mime,
+        "audio_length": audio_length,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -761,9 +862,76 @@ def main():
 
     cache = load_cache()
 
+    now = datetime.now(timezone.utc)
+
+    # -----------------------------------------------------------------------
+    # Find up to 50 cached episodes that are due for re-checking.
+    #
+    # Episodes without last_checked_at are treated as old/unverified.
+    # These are sorted by publication date, oldest first. This is useful
+    # for the first run because the existing cache was created all at once.
+    # -----------------------------------------------------------------------
+
+    recheck_candidates = []
+
+    for episode in episodes:
+        episode_id = episode["episodeId"]
+        cached = cache.get(episode_id)
+
+        if not cached:
+            continue
+
+        if not cached.get("audio_url"):
+            continue
+
+        last_checked = parse_cache_timestamp(
+            cached.get("last_checked_at")
+        )
+
+        if (
+            last_checked is None
+            or now - last_checked
+            >= timedelta(days=RECHECK_AFTER_DAYS)
+        ):
+            recheck_candidates.append(
+                (
+                    last_checked
+                    or datetime.min.replace(tzinfo=timezone.utc),
+                    parse_date(episode.get("date")),
+                    episode_id,
+                )
+            )
+
+    recheck_candidates.sort(
+        key=lambda item: (item[0], item[1])
+    )
+
+    recheck_ids = {
+        episode_id
+        for _, _, episode_id
+        in recheck_candidates[:MAX_RECHECKS_PER_RUN]
+    }
+
+    log.info(
+        "Found %d episodes due for re-check.",
+        len(recheck_candidates),
+    )
+
+    log.info(
+        "Will re-check %d old episodes this run.",
+        len(recheck_ids),
+    )
+
+    # -----------------------------------------------------------------------
+    # Process episodes
+    # -----------------------------------------------------------------------
+
     complete_episodes = []
 
-    for index, episode in enumerate(episodes, start=1):
+    for index, episode in enumerate(
+        episodes,
+        start=1,
+    ):
         episode_id = episode["episodeId"]
 
         log.info(
@@ -775,8 +943,99 @@ def main():
 
         cached = cache.get(episode_id)
 
+        # -------------------------------------------------------------------
+        # Existing cached episode
+        # -------------------------------------------------------------------
+
         if cached and cached.get("audio_url"):
-            # We already resolved this episode's audio URL.
+
+            # This episode is one of the maximum 50 selected for checking.
+            if episode_id in recheck_ids:
+
+                log.info(
+                    "  Checking old audio URL..."
+                )
+
+                available = check_audio_url(
+                    cached["audio_url"]
+                )
+
+                if available is True:
+                    log.info(
+                        "  Audio URL is still available."
+                    )
+
+                    cached["available"] = True
+                    cached["last_checked_at"] = (
+                        now.isoformat()
+                    )
+
+                elif available is False:
+                    log.info(
+                        "  Audio URL is no longer available."
+                    )
+                    log.info(
+                        "  Asking NRK for a new audio manifest..."
+                    )
+
+                    try:
+                        resolved = resolve_episode_audio(
+                            episode_id
+                        )
+
+                        if resolved:
+                            log.info(
+                                "  NRK provided a new audio URL."
+                            )
+
+                            cached.update(
+                                resolved
+                            )
+                            cached["available"] = True
+                            cached["last_checked_at"] = (
+                                now.isoformat()
+                            )
+
+                        else:
+                            log.warning(
+                                "  NRK has no playable audio "
+                                "for this episode."
+                            )
+
+                            cached["available"] = False
+                            cached["last_checked_at"] = (
+                                now.isoformat()
+                            )
+
+                    except Exception as exc:
+                        # Do not remove an episode just because NRK/API
+                        # temporarily failed.
+                        log.warning(
+                            "  Could not refresh episode %s: %s",
+                            episode_id,
+                            exc,
+                        )
+
+                        cached["last_checked_at"] = (
+                            now.isoformat()
+                        )
+
+                else:
+                    # Temporary/unknown error.
+                    # Keep the episode and simply remember that we tried.
+                    cached["last_checked_at"] = (
+                        now.isoformat()
+                    )
+
+            # If an episode has been marked unavailable, don't put it
+            # back into the RSS feed until a later re-check succeeds.
+            if not cached.get("available", True):
+                log.info(
+                    "  Episode is currently unavailable; "
+                    "skipping RSS item."
+                )
+                continue
+
             episode["_audio_url"] = cached["audio_url"]
             episode["_audio_mime"] = cached.get(
                 "audio_mime",
@@ -787,63 +1046,54 @@ def main():
                 0,
             )
 
-            complete_episodes.append(episode)
+            complete_episodes.append(
+                episode
+            )
             continue
 
-        # This is a new episode, so resolve its audio.
+        # -------------------------------------------------------------------
+        # New episode
+        # -------------------------------------------------------------------
+
+        log.info(
+            "  New episode - resolving audio..."
+        )
+
         try:
-            manifest = get_episode_manifest(
+            resolved = resolve_episode_audio(
                 episode_id
             )
 
-            asset = get_audio_asset(manifest)
-
-            if not asset:
+            if not resolved:
                 log.warning(
                     "No audio asset found for %s",
                     episode_id,
                 )
                 continue
 
-            audio_url = asset.get("url")
-
-            if not audio_url:
-                log.warning(
-                    "Audio asset has no URL for %s",
-                    episode_id,
-                )
-                continue
-
-            audio_mime = asset.get(
-                "mimeType",
-                "audio/mpeg",
-            )
-
-            log.info(
-                "  Audio: %s",
-                audio_url,
-            )
-
-            audio_length = get_content_length(
-                audio_url
-            )
-
-            log.info(
-                "  Size: %d bytes",
-                audio_length,
-            )
-
-            episode["_audio_url"] = audio_url
-            episode["_audio_mime"] = audio_mime
-            episode["_audio_length"] = audio_length
+            episode["_audio_url"] = resolved[
+                "audio_url"
+            ]
+            episode["_audio_mime"] = resolved[
+                "audio_mime"
+            ]
+            episode["_audio_length"] = resolved[
+                "audio_length"
+            ]
 
             cache[episode_id] = {
-                "audio_url": audio_url,
-                "audio_mime": audio_mime,
-                "audio_length": audio_length,
+                **resolved,
+                "available": True,
+                "last_checked_at": now.isoformat(),
             }
 
-            complete_episodes.append(episode)
+            log.info(
+                "  New episode cached."
+            )
+
+            complete_episodes.append(
+                episode
+            )
 
         except Exception as exc:
             log.error(
@@ -852,7 +1102,10 @@ def main():
                 exc,
             )
 
-    # Save cache before writing the feed.
+    # -----------------------------------------------------------------------
+    # Save cache
+    # -----------------------------------------------------------------------
+
     save_cache(cache)
 
     if not complete_episodes:
@@ -882,7 +1135,9 @@ def main():
         xml_declaration=True,
     )
 
-    temporary_file.replace(OUTPUT_FILE)
+    temporary_file.replace(
+        OUTPUT_FILE
+    )
 
     log.info(
         "RSS feed written to: %s",

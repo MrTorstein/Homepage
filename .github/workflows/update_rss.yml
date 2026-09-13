@@ -1,0 +1,64 @@
+name: Update podcast RSS
+
+on:
+  schedule:
+    # 00:07 Europe/Oslo
+    - cron: "7 0 * * *"
+      timezone: "Europe/Oslo"
+
+    # 12:07 Europe/Oslo
+    - cron: "7 12 * * *"
+      timezone: "Europe/Oslo"
+
+  # Gjør det mulig å kjøre manuelt fra Actions-fanen.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: podcast-rss-update
+  cancel-in-progress: false
+
+jobs:
+  update-rss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v6
+        with:
+          ref: release
+          token: ${{ secrets.RELEASE_PUSH_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests
+
+      - name: Generate RSS feed
+        run: |
+          python scripts/generer_rss.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- rss/; then
+            echo "No RSS changes."
+            exit 0
+          fi
+
+          git add \
+            rss/med_all_respekt.xml \
+            rss/med_all_respekt_cache.json
+
+          git commit -m "Update podcast RSS archive"
+
+          git push origin HEAD:release
