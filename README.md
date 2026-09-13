@@ -6,5 +6,5 @@ The repo is structures with:
 - pages: Other webpage html files
 - scripts: All script files
 - styles: All CSS files
-- rss: Files related to hosting rss feeds
+- rss: Files related to hosting rss feeds  
 index.html: Main page of the website
