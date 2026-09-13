@@ -2,6 +2,7 @@
 This is my homepage. You can view the page here: https://mrtorstein.github.io/Homepage/
 
 The repo is structures with:
+- .github: Files releated to github actions
 - images: All images used
 - pages: Other webpage html files
 - scripts: All script files
