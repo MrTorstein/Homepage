@@ -5622,252 +5622,352 @@
   "l_46ea5360-e7d5-42dd-aa53-60e7d5b2ddeb": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/f27f475a-c35e-4631-aec5-75201bbb225a_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 45983632
+    "audio_length": 45983632,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_a9dd4dce-d267-4b8e-9d4d-ced267fb8ea3": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/dbd2d571-6766-4fad-9ec8-c7aead2cc2a7_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 50788624
+    "audio_length": 50788624,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_01337ab3-b631-4850-b37a-b3b63138507b": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/7f309c61-b015-45b5-961f-84cc71aa6f27_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 58956304
+    "audio_length": 58956304,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_facd2473-772f-4809-8d24-73772f9809a3": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/4ac3b4ca-b5cc-4325-b417-1c93da19cb10_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 58880272
+    "audio_length": 58880272,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_8757d7d5-e066-4a76-97d7-d5e0669a7665": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/d46f2c30-4b09-48e7-891b-bfc4ce833c5f_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 68452236
+    "audio_length": 68452236,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_be82eb36-c933-4542-82eb-36c933c54200": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/2fe802b3-a98a-4373-a359-0a60a9ebc5d1_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 92856788
+    "audio_length": 92856788,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_13562a8e-9189-413a-962a-8e9189013a17": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/120fea7d-51a6-4bc3-b778-eb88899a292f_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 51533968
+    "audio_length": 51533968,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_9719b802-dfa6-4ec6-99b8-02dfa61ec624": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/125e06fa-6be1-4975-8b64-58fbea20b781_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 48814673
+    "audio_length": 48814673,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_a3654902-5f62-447d-a549-025f62947d11": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/d214f832-fea2-468c-8223-01afe128069b_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 55440400
+    "audio_length": 55440400,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_1f1a499a-bb97-4170-9a49-9abb97917006": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/9417627c-dcc2-4585-b03c-d21d10104126_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 52551184
+    "audio_length": 52551184,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_a5221bc9-e6bc-4b96-a21b-c9e6bcab966a": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/d1d6a9a9-1e8b-4ef9-bd15-282d119fc4e9_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 12898787
+    "audio_length": 12898787,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_7a232e47-adf0-4160-a32e-47adf0616061": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/1b0c344a-1148-42fd-ace1-9620f82d28e9_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 49438480
+    "audio_length": 49438480,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_00d101e7-e15d-40a4-9101-e7e15d00a47b": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/39ab5bed-3196-4008-a6a2-570e43b41760_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 59181520
+    "audio_length": 59181520,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_07e69677-8fc4-4baf-a696-778fc45bafe2": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/75791b74-03e8-44a6-bcee-db8c2030134b_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 44132944
+    "audio_length": 44132944,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_7b92688c-db89-432e-9268-8cdb89332e95": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/23f2bb40-cf2f-4e2d-a0e8-b9c2e640aa64_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 52358802
+    "audio_length": 52358802,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_c8ddb438-dcae-4f06-9db4-38dcae2f0656": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/f2856d0e-7249-498e-a7e6-a742391702ba_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 12442028
+    "audio_length": 12442028,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_36bf6a74-b9ad-4150-bf6a-74b9ad315022": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/a04e5e15-2989-4c01-bcfd-b01ba8244a6e_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 65123536
+    "audio_length": 65123536,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_76341326-0fa3-49da-b413-260fa369da55": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/6fbce00e-7de3-4278-a76e-aaede0eb133a_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 62477392
+    "audio_length": 62477392,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_cb0f7423-ec89-41d7-8f74-23ec8991d7c8": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/41eee648-b5ff-42d0-88d2-0c1c6ac250e2_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 67368785
+    "audio_length": 67368785,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_26fcd598-60a7-4335-bcd5-9860a70335ef": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/942e3c4c-ab95-4586-ac20-72186e6e8a7d_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 54719824
+    "audio_length": 54719824,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_a1849a3e-06fe-413f-849a-3e06fe313fc9": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/b7259bbc-c70e-40c5-b803-23f2c4f3f8de_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 11950675
+    "audio_length": 11950675,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_df07731f-4713-4ddc-8773-1f47136ddcdc": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/f1447a04-24d3-4d21-9ccd-08b9af747b05_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 57347536
+    "audio_length": 57347536,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_269a7d4d-d2a9-4ad0-9a7d-4dd2a93ad009": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/b85c595e-a849-433d-8b9a-5a25316ab883_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 50417680
+    "audio_length": 50417680,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_467f987b-aa68-44b3-bf98-7baa6884b3c3": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/44aa1ab9-b608-4620-a840-21fe81b6831e_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 63383441
+    "audio_length": 63383441,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_357970c5-2c9e-4c66-b970-c52c9e8c66a3": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/2049af59-6938-4563-9c3b-7294cb144af4_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 47467408
+    "audio_length": 47467408,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_cab5524b-88b4-4405-b552-4b88b454057d": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/db6e3e60-ca14-4723-be14-81e445e02917_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 58166032
+    "audio_length": 58166032,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_ec2b3ad5-2ce6-4832-ab3a-d52ce64832fc": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/de1ffd8a-efc5-44f5-83b9-faa316fcb1ef_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 51245392
+    "audio_length": 51245392,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_1b565cae-0ced-4839-965c-ae0ced0839b3": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/a4785950-1b5e-4e5d-9167-182b85965783_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 57375760
+    "audio_length": 57375760,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_57383ee2-c7c0-405f-b83e-e2c7c0905f91": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/b86fc62b-2a99-48f2-85a4-8d9c6354b7eb_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 18507858
+    "audio_length": 18507858,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_387b59da-0112-445e-bb59-da0112845ebc": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/d7ce4986-1702-4a40-903a-293a1f77f0a4_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 49349776
+    "audio_length": 49349776,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_9fe7417c-6b37-4d4a-a741-7c6b37fd4ae8": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/b92ba52b-b51e-468b-b59a-80fbc5011ba9_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 16003980
+    "audio_length": 16003980,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_e3335158-d8d4-46f8-b351-58d8d466f8c1": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/a4336bfe-b5d7-48d7-850e-3cbb2a84761f_0_ID192MP3.mp3",
     "audio_mime": "audio/mp3",
-    "audio_length": 88214783
+    "audio_length": 88214783,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_6537838b-1b75-460d-b783-8b1b75060d54": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-12-12_1832_690.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 11239600
+    "audio_length": 11239600,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_1aa5f405-307f-4861-a5f4-05307f08612d": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-12-12_1441_3180.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 89685932
+    "audio_length": 89685932,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_37dc1fb4-51ef-447e-9c1f-b451ef447e2b": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-12-05_1516_2054.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 73102809
+    "audio_length": 73102809,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_f30a50a7-fc69-415f-8a50-a7fc69115f11": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-11-28_1338_1939.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 80689325
+    "audio_length": 80689325,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_487ee6af-2f42-4fa2-bee6-af2f421fa272": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-11-21_1554_2660.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 72445748
+    "audio_length": 72445748,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_86c079ef-494d-4a5a-8079-ef494d1a5a23": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-11-14_1525_2234.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 82225383
+    "audio_length": 82225383,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_d3df1e92-fa36-4c3b-9f1e-92fa361c3b81": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-11-13_0924_1279.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 10653383
+    "audio_length": 10653383,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_18ffe7c8-f6e3-4a79-bfe7-c8f6e3ea7978": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-11-07_1405_1790.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 67241502
+    "audio_length": 67241502,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_6ccecd9d-54a7-4bc6-8ecd-9d54a79bc63f": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-10-31_1622_3093.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 64927502
+    "audio_length": 64927502,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_8845ee03-d2b5-4875-85ee-03d2b56875d0": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-10-24_1252_593.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 73007464
+    "audio_length": 73007464,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_43a7941c-7fba-4f69-a794-1c7fba3f6948": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-10-17_1329_152.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 83729416
+    "audio_length": 83729416,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_fc151967-4357-4902-9519-674357890219": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-10-10_1503_917.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 61365854
+    "audio_length": 61365854,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_5ea7601d-872a-43ec-a760-1d872af3ec74": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-10-03_1257_1401.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 79675601
+    "audio_length": 79675601,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_d98aab34-5840-407a-8aab-345840b07a13": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-09-26_1313_1865.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 66349413
+    "audio_length": 66349413,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_7104fe85-111a-4bce-84fe-85111a8bce75": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-09-19_1300_2493.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 86704202
+    "audio_length": 86704202,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_1909019c-848c-4ede-8901-9c848c0ede54": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-09-12_1309_479.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 100563938
+    "audio_length": 100563938,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_379bbeb0-a822-4573-9bbe-b0a822e57314": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-09-05_1439_1105.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 87863438
+    "audio_length": 87863438,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_d9532980-4ce2-4e3c-9329-804ce29e3cbf": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-08-29_1300_3288.MP3",
     "audio_mime": "audio/mp3",
-    "audio_length": 84436602
+    "audio_length": 84436602,
+    "available": true,
+    "last_checked_at": "2026-09-14T13:55:16.540350+00:00"
   },
   "l_30308217-7002-4060-b082-177002d06060": {
     "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/med_all_respekt_2019-08-22_1221_2821.MP3",
