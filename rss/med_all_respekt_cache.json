@@ -9014,5 +9014,12 @@
     "audio_length": 45966572,
     "available": true,
     "last_checked_at": "2026-10-07T17:23:25.925709+00:00"
+  },
+  "l_79d05c4b-68c6-4f0d-86a8-a9dbebb7590b": {
+    "audio_url": "https://podkast.nrk.no/fil/med_all_respekt/79d05c4b-68c6-4f0d-86a8-a9dbebb7590b_e1f43835-7042-4dcb-9c5f-ad3c92ed844b_ID192MP3.mp3",
+    "audio_mime": "audio/mp3",
+    "audio_length": 43720748,
+    "available": true,
+    "last_checked_at": "2026-10-08T17:21:18.424726+00:00"
   }
 }
